@@ -42,6 +42,23 @@ def save_text_from_url(url):
     parser.feed(html)
     return parser.text
 
+def download_texts(url, out, num):
+    for index in range(num):
+        text = []
+        try:
+            text += save_text_from_url(url + str(index) + str("/"))
+            text += "\n\n\n"
+            print index
+        except KeyboardInterrupt:
+            break
+        except:
+            pass
+        text = ' '.join(text)
+
+        with codecs.open(out, "a", "utf-8") as file_out:
+            file_out.write(text)
+        pass
+
 
 def main():
     """collect poems =)"""
@@ -58,22 +75,10 @@ def main():
         parser.error("Out file isn't identified.")
 
     out = options.out
+    poems_num = 10000
+    
+    download_texts("http://stihidl.ru/poem/", out, poems_num)
 
-    for index in range(0, 10000):
-		text = []
-        try:
-            text += save_text_from_url("http://stihidl.ru/poem/" + str(index) + str("/"))
-            text += "\n\n\n"
-            print index
-        except KeyboardInterrupt:
-            break
-        except:
-            pass
-        text = ' '.join(text)
-
-        with codecs.open(out, "a", "utf-8") as file_out:
-            file_out.write(text)
-        pass
 
 if __name__ == "__main__":
     main()
