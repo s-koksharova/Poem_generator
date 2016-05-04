@@ -59,8 +59,8 @@ def main():
 
     out = options.out
 
-    text = []
     for index in range(0, 10000):
+		text = []
         try:
             text += save_text_from_url("http://stihidl.ru/poem/" + str(index) + str("/"))
             text += "\n\n\n"
@@ -69,11 +69,11 @@ def main():
             break
         except:
             pass
-    text = ' '.join(text)
+        text = ' '.join(text)
 
-    with codecs.open(out, "w", "utf-8") as file_out:
-        file_out.write(text)
-    pass
+        with codecs.open(out, "a", "utf-8") as file_out:
+            file_out.write(text)
+        pass
 
 if __name__ == "__main__":
     main()
