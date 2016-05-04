@@ -68,16 +68,19 @@ def main():
                       dest='out',
                       metavar='out text path',
                       help='Path to file to write out collected text.')
+    parser.add_option('-n', '--num',
+                      dest='num',
+                      metavar='number of texts',
+                      help='Number of texts to download.')
     options, args = parser.parse_args()
     print options
 
     if options.out is None:
         parser.error("Out file isn't identified.")
+     if options.num is None:
+        parser.error("Number of texts to download isn't defined.")
 
-    out = options.out
-    poems_num = 10000
-    
-    download_texts("http://stihidl.ru/poem/", out, poems_num)
+    download_texts("http://stihidl.ru/poem/", options.out, int(options.num))
 
 
 if __name__ == "__main__":
